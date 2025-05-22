@@ -9,14 +9,47 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                ProductImageView()
-                ProductInfoView()
-                RewardsSectionView()
-                PromoOptionsView()
-                ProductDescriptionView()
-                SimilarProductsView()
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    ProductImageView()
+                    ProductInfoView()
+                    RewardsSectionView()
+                    PromoOptionsView()
+                    ProductDescriptionView()
+                    SimilarProductsView()
+                        .padding(.bottom, 104)
+                }
+            }
+            .overlay(alignment: .bottom) {
+                AddToCartButtonView()
+            }
+            .ignoresSafeArea(edges: .bottom)
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // Button Action
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(Color.gray6)
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        // Button Action
+                    }) {
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(Color.gray6)
+                            .frame(width: 24, height: 24)
+                    }
+                }
             }
         }
     }
@@ -34,7 +67,7 @@ struct ProductImageView: View {
         }
         
         Divider()
-            .overlay(Color.gray4)
+            .overlay(Color.gray5)
     }
 }
 
@@ -98,7 +131,8 @@ struct RewardsSectionView: View {
                             
                             Button(action: {}) {
                                 Image(systemName: "info.circle.fill")
-                                    .foregroundColor(Color.gray5)
+                                    .foregroundColor(Color.gray6)
+                                    .font(.system(size: 16))
                             }
                         }
                     }
@@ -133,7 +167,8 @@ struct RewardsSectionView: View {
                             
                             Button(action: {}) {
                                 Image(systemName: "info.circle.fill")
-                                    .foregroundColor(Color.gray5)
+                                    .foregroundColor(Color.gray6)
+                                    .font(.system(size: 16))
                             }
                         }
                     }
@@ -173,8 +208,7 @@ struct RewardsSectionView: View {
             .padding(.horizontal)
             
             Divider()
-                .overlay(Color.gray4)
-            
+                .overlay(Color.gray5)
         }
     }
 }
@@ -205,11 +239,11 @@ struct PromoOptionsView: View {
             PromoOptionView(viewModel: promoViewModel)
                 .padding(.bottom, 20)
         }
+        
         Divider()
-            .overlay(Color.gray4)
+            .overlay(Color.gray5)
     }
 }
-
 
 /// Product Desctiption
 struct ProductDescriptionView: View {
@@ -225,7 +259,7 @@ struct ProductDescriptionView: View {
             Text(productDescription)
                 .font(.system(size: 14))
                 .foregroundColor(Color.gray6)
-                .lineLimit(isExpanded ? nil : 2)
+                .lineLimit(isExpanded ? nil : 3)
             
             Button(action: {
                 withAnimation {
@@ -236,14 +270,13 @@ struct ProductDescriptionView: View {
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.blue)
             }
-            
         }
         .padding(.vertical, 20)
         .padding(.horizontal)
         .background(Color.white)
         
         Divider()
-            .overlay(Color.gray4)
+            .overlay(Color.gray5)
     }
 }
 
@@ -311,6 +344,7 @@ struct SimilarProductsView: View {
             HStack {
                 Text("Produk Serupa")
                     .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(Color.gray12)
                 
                 Spacer()
                 
@@ -339,6 +373,34 @@ struct SimilarProductsView: View {
         }
         .padding(.top, 20)
         .background(Color.white)
+    }
+}
+
+/// Bottom Navigation Bar
+struct AddToCartButtonView: View {
+    var body: some View {
+        Button(action: {}) {
+            HStack {
+                Image(systemName: "plus")
+                    .font(.system(size: 16, weight: .bold))
+                Text("Keranjang")
+                    .font(.system(size: 16, weight: .bold))
+            }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(Color.blue)
+            .cornerRadius(8)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 28)
+            .padding(.top)
+        }
+        .background(Color.white)
+        .overlay(
+            Rectangle()
+                .inset(by: 0.5)
+                .stroke(Color.gray4, lineWidth: 1)
+        )
     }
 }
 

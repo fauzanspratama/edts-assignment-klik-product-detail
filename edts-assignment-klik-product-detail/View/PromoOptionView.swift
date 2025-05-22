@@ -17,6 +17,7 @@ struct OptionTagView: View {
 
             Text(item.label)
                 .font(.system(size: 14, weight: .medium))
+                .foregroundColor(Color.gray10)
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
@@ -24,7 +25,7 @@ struct OptionTagView: View {
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                .stroke(Color.gray4, lineWidth: 1)
         )
     }
 }

@@ -17,7 +17,7 @@ struct ProductCardView: View {
                         .frame(width: 32, height: 32)
                         .overlay(
                             Image(systemName: "plus")
-                                .font(.system(size: 20, weight: .bold))
+                                .font(.system(size: 18, weight: .bold))
                                 .foregroundColor(.white)
                         )
                 }
@@ -67,11 +67,14 @@ struct ProductCardView: View {
                     Text(product.title)
                         .font(.system(size: 14, weight: .medium))
                         .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(Color.gray10)
                     
                     
                     Text(product.formattedCurrentPrice)
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
+                        .lineLimit(1)
+                        .foregroundColor(Color.gray12)
                     
                     if let discount = product.discountPercentage,
                        let original = product.formattedOriginalPrice {
@@ -83,7 +86,7 @@ struct ProductCardView: View {
                             
                             Text(original)
                                 .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.secondary)
+                                .foregroundColor(Color.gray6)
                                 .strikethrough()
                         }
                     }
@@ -109,7 +112,7 @@ struct ProductCardView: View {
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                .stroke(Color.gray4, lineWidth: 1)
         )
         .frame(width: 136)
     }
